@@ -3,7 +3,7 @@
 var http = undefined;
 var https = undefined;
 
-const urlParse = require('./urlparse.js');
+const uu = require('url');
 
 var JsonClient = function(options) {
 	if (typeof(options) !== 'object') {
@@ -31,11 +31,11 @@ JsonClient.prototype.c = function(url, data, extraHeaders) {
 	var rv = (Promise.resolve()
 			  .then(function() {
 				  var rv = new Promise(function(resolve, reject) {
-					  var u = urlParse(url), p;
-					  if (! u) {
+					  var u = uu.parse(url), p;
+					  if (! (u && u.protocol)) {
 						  throw new Error('Bad URL');
 					  }
-					  switch (u.proto) {
+					  switch (u.protocol) {
 					  case 'http':
 						  if (! http) {
 							  http = require('http');
@@ -64,6 +64,7 @@ JsonClient.prototype.c = function(url, data, extraHeaders) {
 						  hostname: u.host,
 						  port: u.port,
 						  path: u.path,
+						  auth: u.auth,
 						  method: 'xxx',
 						  headers: {
 							  'Host': u.host,
