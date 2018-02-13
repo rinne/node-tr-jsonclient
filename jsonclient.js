@@ -36,13 +36,13 @@ JsonClient.prototype.c = function(url, data, extraHeaders) {
 						  throw new Error('Bad URL');
 					  }
 					  switch (u.protocol) {
-					  case 'http':
+					  case 'http:':
 						  if (! http) {
 							  http = require('http');
 						  }
 						  p = http;
 						  break;
-					  case 'https':
+					  case 'https:':
 						  if (! https) {
 							  https = require('https');
 						  }

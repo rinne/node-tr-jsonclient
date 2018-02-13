@@ -1,6 +1,6 @@
 {
 	"name": "tr-jsonclient",
-	"version": "0.2.0",
+	"version": "0.9.0",
 	"description": "Simple promise-based JSON API client.",
 	"main": "jsonclient.js",
     "dependencies": {

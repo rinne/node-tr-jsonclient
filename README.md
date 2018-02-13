@@ -9,18 +9,25 @@ Reference
 =========
 
 ```
-const jsonGet = require('tr-jsonget');
-return (jsonGet('http://foo.bar/zap.json')
+const JsonClient = require('tr-jsonclient');
+
+var client = new JsonClient();
+
+return (client.c('https://www.foo.bar/post-endpoint/somewhere', { foo: 'bar', something: 'or another', a: [1,2,3] })
         .then(function(ret) {
-          console.log('Oh yeah!');
-          console.log(ret);
-          return ret;
+            console.log('JSON POST response:', ret);
+        })
+        .then(function() {
+            return client.c('https://www.foo.bar/some.json');
+        .then(function(ret) {
+            console.log('JSON GET response:', ret);
         })
         .catch(function(e) {
-          console.log('Something terribly wrong');
-          throw e;
+            console.log('Something terrible happened');
+            throw e;
         }));
-      
+
+
 ```
 
 
